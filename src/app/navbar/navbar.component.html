@@ -1,0 +1,55 @@
+
+
+
+
+<nav class="white home-block-nav">
+
+    <div class="nav-wrapper white home-block-nav-menu">
+
+
+        <a href="#" data-target="mobile-demo" (click)="drawer.toggle()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+
+      <div class="home-block-nav-logo">
+        <a class="waves-effect waves-teal right" href="/"><img src="../../assets/logo.png" alt="logo" height="50%"></a>
+      </div>
+      <div class="home-block-nav-logo-sm">
+        <a class="waves-effect waves-teal right" href="/"><img src="../../assets/logo-sm.png" alt="logo" width="100%"></a>
+      </div>
+      <ul class="hide-on-med-and-down">
+        <li><a href="sass.html">HOME</a></li>
+        <li><a href="#order">ORDER</a></li>
+        <li><a href="mobile.html">SUPPORT</a></li>
+        <li><a href="collapsible.html">SEARCH</a></li>
+      </ul>
+      <div class="home-block-nav-btn">
+        <button mat-button class="waves-effect waves-teal btn-flat left">SIGN IN</button>
+        <a href="#" class="cart"><i class="material-icons">add_shopping_cart</i></a>
+      </div>
+
+    </div>
+</nav>
+
+<mat-drawer-container class="sidenav-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+
+
+    <ul class="" id="mobile-demo">
+
+      <li style="margin-bottom: 20px; margin-top: 100px"><a href="/"><img src="../../assets/logo.png" alt="logo" height="75%"/></a></li>
+      <li><a href="sass.html">HOME</a></li>
+        <li><a href="#order">ORDER</a></li>
+        <li><a href="mobile.html">SUPPORT</a></li>
+        <li><a href="collapsible.html">SEARCH</a></li>
+      <li>
+        <a  href="#">SIGN IN</a>
+
+      </li>
+      <li><a href="#" class="cart"><i class="material-icons">add_shopping_cart</i></a></li>
+
+    </ul>
+
+
+  </mat-drawer>
+
+</mat-drawer-container>

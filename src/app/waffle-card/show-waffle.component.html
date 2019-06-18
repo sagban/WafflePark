@@ -1,0 +1,21 @@
+<div class="show-card">
+  <div class="show-card-image">
+    <img src="{{data.image}}" alt="{{data.title}} image" width="100%" height="100%">
+  </div>
+
+  <div class="show-card-content">
+    <mat-card-title-group>
+      <mat-card-title><h4 mat-dialog-title>{{data.title}}</h4></mat-card-title>
+      <mat-card-subtitle class="show-card-sub">
+        <p>{{data.description}}<br>
+        <br><span class="price">{{data.price}}</span></p>
+      </mat-card-subtitle>
+    </mat-card-title-group>
+    <div class="card-action" mat-dialog-actions>
+
+
+    </div>
+  </div>
+  <button mat-mini-fab (click)="onNoClick()" color="black" class="close"><i class="material-icons">close</i></button>
+</div>
+

@@ -1,0 +1,35 @@
+.sidecart{
+  display: block;
+  position: sticky;
+  top:100px;
+  margin-top: 100px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 25px 0px;
+}
+
+.checkout{
+  width: 100%;
+  color:#fff;
+  background: #ee6e73;
+  height: 50px;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  margin-bottom: 16px;
+}
+.checkout:focus{
+  background: #ee6e73 !important;
+}
+
+.parked-list{
+  margin-top: 10px;
+}
+@media(max-width: 600px){
+  .sidecart{
+    display: block;
+    position: sticky;
+    bottom:-63px;
+    margin-top: 0;
+
+  }
+}

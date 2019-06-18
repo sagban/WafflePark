@@ -1,0 +1,114 @@
+.waffle-card{
+  margin:auto 0;
+  width: 100%;
+}
+.waffle-card-heading{
+  padding: 5px 15px;
+  margin-bottom: 20px;
+}
+.waffle-card-heading h4{
+  font-weight: 100;
+  font-size: 32px;
+}
+.example-card {
+  width: 100%;
+  max-width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px;
+  cursor: pointer;
+}
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.price{
+  padding: 5px 6px;
+  height: 32px;
+  color:#111;
+
+  /*border-radius: 2px;*/
+  /*float: right;*/
+  /*border: 2px #f8c446 dashed;*/
+}
+.price:before{
+  content: "\20B9";
+  float: left;
+}
+.card-action{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.waffle-item{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.show_waffle{
+  text-decoration: none !important;
+  color: #111;
+  display: block;
+}
+.show_waffle h4 {
+  font-size: 18px;
+}
+
+
+.show-card{
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+}
+.show-card-sub{
+  width: 100%;
+}
+.show-card-image{
+  width: 100%;
+}
+
+.show-card-content{
+  padding: 26px 22px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .show-card{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+  }
+
+  .show-card-image{
+    width:55%;
+  }
+
+  .show-card-content{
+    float: right;
+    width:45%;
+  }
+   .close{
+    top: calc(0% + 20px) !important;
+      left: calc(100% - 20px) !important;
+      display: block !important;
+    position: static !important;
+
+  }
+
+}
+
+
+ .close{
+   top: 10px;
+   left: calc(95% - 50px);
+   margin: 10px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    box-shadow: 0 0!important;
+ }
+ .close:focus{
+   background: white;
+ }
