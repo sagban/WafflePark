@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject} from '@angular/core';
+import { Component, OnInit, Inject, Input} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DOCUMENT} from '@angular/platform-browser';
-// import {ShowWaffleComponent} from '../show-waffle/show-waffle.component';
-import {ActivatedRoute} from '@angular/router';
+import {CartService} from '../cart.service';
 
 
 export interface DialogData {
@@ -22,9 +21,13 @@ export class WaffleCardComponent implements OnInit {
 
   waffles: any;
   waff:any;
-  constructor(private http: HttpClient, public dialog: MatDialog, @Inject(DOCUMENT) private document: Document) { }
+  // cart: any = [];
 
-
+  constructor(
+    private http: HttpClient,
+    public dialog: MatDialog,
+    @Inject(DOCUMENT) private document: Document,
+    private _cartService: CartService) { }
 
   ngOnInit() {
 
@@ -36,33 +39,29 @@ export class WaffleCardComponent implements OnInit {
 
   openDialog(id : any) : void {
 
-    console.log(id, "clicked");
     var url = 'http://' + this.document.location.hostname + ':3000/api/waffle/' + id;
     this.http.get(url).subscribe((res: any) => {
-      // console.log(res);
+
       this.waff = res;
-      // console.log(this.waff);
       const dialogRef = this.dialog.open(ShowWaffleComponent, {
         width: 'auto',
-        minWidth: '60%',
+        minWidth: '75%',
         maxWidth: '95%',
         height: 'auto',
         maxHeight: '100%',
-        data: {image: this.waff.image, title: this.waff.title, description: this.waff.description, price: this.waff.price, info: this.waff.info}
+        data: {image: this.waff.image, title: this.waff.title, description: this.waff.description, price: this.waff.price, info: this.waff.item}
+
       });
+
+
+      dialogRef.afterClosed().subscribe(res =>{
+        if(res){
+          // this.cart.push(res);
+          // console.log(this.cart);
+          this._cartService.addItems(res);
+        }
+      })
     });
-
-    // const waffl = this.waffles;
-    //
-    //
-    // for(var i=0; i<waffl.length; i++){
-    //   if(waffl[i]._id = id){
-    //     this.waff = waffl[i];
-    //     break;
-    //   }
-    // }
-
-
 
   }
 
@@ -78,6 +77,7 @@ export class WaffleCardComponent implements OnInit {
 
 export class ShowWaffleComponent {
 
+  quantity:number = 1;
   constructor(public dialogRef: MatDialogRef<ShowWaffleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
@@ -86,16 +86,26 @@ export class ShowWaffleComponent {
     this.dialogRef.close();
   }
 
-  // ngOnInit() {
-  //
-  //   const id = this.route.snapshot.paramMap.get('id');
-  //
-  //   const url = 'http://127.0.0.1:3000/api/waffle/' + id ;
-  //
-  //   this.http.get(url).subscribe((res: any) => {
-  //     console.log(res);
-  //     this.waffle = res;
-  //   });
-  // }
+  incQuantity(): void{
+    this.quantity++;
+  }
+
+  decQuantity(): void{
+    if(this.quantity>1){
+      this.quantity--;
+    }
+  }
+
+  totalPrice(price:number, quantity:number): number{
+    return price * quantity;
+  }
+
+  addToCart(): void{
+
+    // this.cart.append();
+    var cartitem = this.data;
+    cartitem["quantity"] = this.quantity;
+    this.dialogRef.close(cartitem);
+  }
 
 }

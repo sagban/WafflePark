@@ -1,11 +1,13 @@
 .home-block-nav{
+
+  display: flex;
+  position: sticky;
+  position: -webkit-sticky !important;
+  top:0;
+  z-index: 2;
   margin-top: -10px;
   height:75px;
   padding: 0 20px;
-  display: flex;
-  position: sticky;
-  top:0;
-  z-index: 2;
 
 }
 .home-block-nav-logo{
