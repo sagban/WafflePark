@@ -20,6 +20,8 @@ import { HomeComponent } from './home/home.component';
 import { SidecartComponent } from './sidecart/sidecart.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatBadgeModule} from '@angular/material/badge';
+import {CartService} from './cart.service';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,13 @@ import {MatSliderModule} from '@angular/material/slider';
     MatDividerModule,
     MatDialogModule,
     MatSidenavModule,
-    MatSliderModule
+    MatSliderModule,
+    MatBadgeModule,
   ],
   entryComponents:[
     ShowWaffleComponent
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -21,20 +21,18 @@ export class WaffleCardComponent implements OnInit {
 
   waffles: any;
   waff:any;
-  // cart: any = [];
 
   constructor(
     private http: HttpClient,
     public dialog: MatDialog,
     @Inject(DOCUMENT) private document: Document,
-    private _cartService: CartService) { }
+    private _cartService: CartService) {}
 
   ngOnInit() {
-
     this.http.get('http://'+this.document.location.hostname+':3000/api/waffles').subscribe((res: any) => {
-      console.log(res);
       this.waffles = res;
     });
+
   }
 
   openDialog(id : any) : void {
@@ -56,9 +54,8 @@ export class WaffleCardComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(res =>{
         if(res){
-          // this.cart.push(res);
-          // console.log(this.cart);
-          this._cartService.addItems(res);
+          this._cartService.addItems(res).subscribe();
+
         }
       })
     });
