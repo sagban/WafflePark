@@ -1,19 +1,19 @@
 exports = module.exports = {};
 var Waffles = require('../models/Waffles');
-var mid = require('node-machine-id')
-var sid = mid.machineIdSync();
+var Cart = require("../models/Cart");
+
 
 exports.home = (req, res) =>{
   res.render('index', { title: 'Waffle Park API service' });
 };
 
 exports.waffles = (req, res) =>{
+
   Waffles.find((err, waffles)=>{
     if(err){
       console.log(err);
     }
     else{
-      // console.log(waffles);
       res.send(waffles);
     }
   });
@@ -28,7 +28,6 @@ exports.waffle = (req, res) =>{
       console.log(err);
     }
     else{
-      // console.log(waffle, "Waffle Demanded");
       res.send(waffle);
     }
   });
@@ -39,31 +38,23 @@ exports.waffle = (req, res) =>{
 exports.addCart = (req, res) =>{
 
   var item = req.body;
-  if(req.session['cart']){
-    req.session['cart']['data'].push(item);
-  }
-  else{
-    var c = [];
-    c.push(item);
-    req.session['cart'] = {
-      uid : sid,
-      data: c
-    };
-  }
-  res.send(req.session['cart']['data']);
+
+
+  var cart = new Cart(req.session['cart']? req.session['cart']: {});
+  cart.add(item, item.id);
+  req.session['cart'] = cart;
+  res.send({
+    status: "Item Added"
+  });
 
 
 };
 
 exports.fetchCart = (req, res) =>{
 
-  if(!req.session['cart']){
-    req.session['cart'] = {
-      uid : sid,
-      data: []
-    };
-  }
-  res.send(req.session.cart);
+  var cart = new Cart(req.session['cart']? req.session['cart']: {});
+  var c = cart.getList();
+  res.send(c);
 
 };
 
@@ -71,12 +62,10 @@ exports.fetchCart = (req, res) =>{
 exports.updateCart = (req, res) =>{
 
   var item = req.body;
-  console.log(item, "jg");
-  if(req.session['cart']){
-    req.session['cart']['data'] = item;
-    res.send("Done");
-  }
-  else res.send("Not Done");
-
-
+  var cart = new Cart({});
+  cart.update(item);
+  req.session['cart'] = cart;
+  res.send({
+    status: "Updated"
+  });
 };

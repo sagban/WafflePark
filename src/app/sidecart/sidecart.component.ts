@@ -11,9 +11,10 @@ export class SidecartComponent implements OnInit {
   cart: any = [];
   quantity: number;
 
+
   constructor(private _cartService: CartService) {
     this._cartService.getItems().subscribe(res =>{
-      this._cartService.cart = res.data;
+      this._cartService.cart = res;
       this.showCart();
     });
   }
@@ -28,20 +29,26 @@ export class SidecartComponent implements OnInit {
 
   incQuantity(i): void{
     this.cart[i].quantity++;
-    this._cartService.updateItems(this.cart).subscribe();
+    this._cartService.updateItems(this.cart).subscribe(res=>{
+      console.log(res);
+    });
   }
 
   decQuantity(i): void{
     if(this.cart[i].quantity > 1){
       this.cart[i].quantity--;
-      this._cartService.updateItems(this.cart).subscribe();
+      this._cartService.updateItems(this.cart).subscribe(res=>{
+      console.log(res);
+    });
 
     }
   }
-  
+
   removeItem(i):void{
     this.cart.splice(i, 1);
-    this._cartService.updateItems(this.cart).subscribe();
+    this._cartService.updateItems(this.cart).subscribe(res=>{
+      console.log(res);
+    });
   }
 
   totalItemPrice(price:number, quantity:number): number{

@@ -47,14 +47,17 @@ export class WaffleCardComponent implements OnInit {
         maxWidth: '95%',
         height: 'auto',
         maxHeight: '100%',
-        data: {image: this.waff.image, title: this.waff.title, description: this.waff.description, price: this.waff.price, info: this.waff.item}
+        data: {id: this.waff._id,image: this.waff.image, title: this.waff.title, description: this.waff.description, price: this.waff.price, info: this.waff.item}
 
       });
 
 
       dialogRef.afterClosed().subscribe(res =>{
         if(res){
-          this._cartService.addItems(res).subscribe();
+
+          this._cartService.addItems(res).subscribe(res=>{
+            console.log(res);
+          });
 
         }
       })
@@ -77,7 +80,6 @@ export class ShowWaffleComponent {
   quantity:number = 1;
   constructor(public dialogRef: MatDialogRef<ShowWaffleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
   }
   onNoClick(): void {
     this.dialogRef.close();
