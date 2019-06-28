@@ -34,5 +34,15 @@
       <button class="form-btn" [disabled]="!LoginForm.valid" mat-flat-button>Login</button>
     </form>
   </div>
+  <div class="login-feet">
+    <mat-progress-spinner *ngIf="isSubmit == true"
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="value"
+        [diameter]="30">
+    </mat-progress-spinner>
+    <p *ngIf="message != ''">{{message}}</p>
+  </div>
 
 </div>

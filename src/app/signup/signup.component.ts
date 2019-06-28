@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
   mode = 'indeterminate';
   value = 50;
   isSubmit: Boolean = false;
+  message: string;
 
   ngOnInit() {
 
@@ -60,8 +61,20 @@ export class SignupComponent implements OnInit {
 
   onSubmit():void{
     this.isSubmit = true;
-    this._formSubmitService.signup(this.SignupForm.value).subscribe();
-    console.log(this.SignupForm.value);
+    this._formSubmitService.signup(this.SignupForm.value).subscribe(res =>{
+      this.isSubmit = false;
+      if(res.status == 0){
+        this.message = res.message;
+      }
+
+      else if(res.status == 1){
+        this._openDialogService.closeDialog();
+      }
+      else{
+        this.message = "Something went wrong";
+      }
+
+    });
   }
 
 

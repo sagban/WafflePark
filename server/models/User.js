@@ -13,10 +13,13 @@ let User = new Schema({
     type: String
   },
   address:[{
-    body : String
+    body : {
+      type: String
+    }
+
   }]
+},
+  { autoCreate: true});
 
-});
 
-
-module.exports = mongoose.model('User', User, 'User');
+module.exports = mongoose.model('User', User);
