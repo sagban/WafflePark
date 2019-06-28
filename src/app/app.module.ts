@@ -18,10 +18,21 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { SidecartComponent } from './sidecart/sidecart.component';
+import {CartService} from './cart.service';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { LoginComponent } from './login/login.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatBadgeModule} from '@angular/material/badge';
-import {CartService} from './cart.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatStepperModule} from '@angular/material/stepper';
+import { SignupComponent } from './signup/signup.component';
+import {OpenDialogService} from './open-dialog.service';
+import {FormSubmitService} from './form-submit.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -34,7 +45,10 @@ import {CartService} from './cart.service';
     FooterComponent,
     HomeComponent,
     SidecartComponent,
-    ShowWaffleComponent
+    ShowWaffleComponent,
+    CheckoutComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -49,11 +63,23 @@ import {CartService} from './cart.service';
     MatSidenavModule,
     MatSliderModule,
     MatBadgeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
+    MatProgressSpinnerModule
   ],
   entryComponents:[
-    ShowWaffleComponent
+    ShowWaffleComponent,
+    LoginComponent
   ],
-  providers: [CartService],
+  providers: [
+    CartService,
+    OpenDialogService,
+    FormSubmitService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

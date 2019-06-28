@@ -22,6 +22,9 @@
   letter-spacing: 0.2px;
   margin: 16px 0px !important;
   border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .checkout:focus{
   background: #ee6e73 !important;

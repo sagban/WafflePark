@@ -1,0 +1,41 @@
+<div>
+  <app-navbar></app-navbar>
+  <div class="main-flex">
+    <div class="main">
+      <div class="checkout-heading">
+        <h4>Secure Checkout</h4>
+      </div>
+      <div class="row">
+        <mat-vertical-stepper [linear]="true" #stepper class="stepper">
+          <mat-step>
+            <ng-template matStepLabel><h4>Account</h4></ng-template>
+            <div class="account">
+              <div class="account-body">
+                <div class="account-login">
+                  <button class="account-btn-login" type="button" (click)="openLoginDialog()" mat-flat-button><span>Have an account?</span><br>LOG IN</button>
+                </div>
+                <div class="account-signup">
+                  <button class="account-btn-signup" type="button" (click)="openSignupDialog()" mat-flat-button><span>Create new account?</span><br>SIGN UP</button>
+                </div>
+              </div>
+            </div>
+
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel><h4>Delivery address</h4></ng-template>
+            <div class="address"></div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel><h4>Payment</h4></ng-template>
+            <div class="payment"></div>
+          </mat-step>
+
+        </mat-vertical-stepper>
+      </div>
+
+
+
+    </div>
+    <app-sidecart class="aside"></app-sidecart>
+  </div>
+</div>

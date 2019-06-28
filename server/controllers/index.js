@@ -1,6 +1,7 @@
 exports = module.exports = {};
 var Waffles = require('../models/Waffles');
 var Cart = require("../models/Cart");
+var User = require("../models/User");
 
 
 exports.home = (req, res) =>{
@@ -68,4 +69,12 @@ exports.updateCart = (req, res) =>{
   res.send({
     status: "Updated"
   });
+};
+
+exports.signup = (req, res) =>{
+  console.log(req.body);
+};
+
+exports.login = (req, res) =>{
+
 };

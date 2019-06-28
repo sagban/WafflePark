@@ -1,0 +1,89 @@
+.main-flex{
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding-top: 80px;
+  background: #fafafa;
+}
+
+@media(max-width: 600px){
+  .main-flex{
+    display: block;
+  }
+}
+.main{
+  width:65%;
+  padding-left:5%;
+}
+
+.aside{
+  width: 35%;
+  padding-right: 8%;
+  padding-left: 2%;
+}
+.stepper{
+  background: transparent;
+}
+
+.mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {
+  background-color: #fff !important;
+}
+
+.checkout-heading{
+  padding: 5px 72px;
+  margin-bottom: 10px;
+}
+
+.account, .address, .payment{
+  padding-left: 72px;
+  padding-bottom: 40px;
+  margin-top: -10px;
+  z-index: 2 !important;
+  height: auto;
+  width: 100%;
+  background: white;
+  position: relative;
+  display: block;
+}
+.account-body{
+  display: flex;
+}
+
+.account-body .account-signup{
+  float: right;
+}
+
+
+.account-btn-login{
+  color:#ee6e73;
+  background: #fff;
+  margin: 16px 26px 16px 0px !important;
+  border: 1px #ee6e73 solid !important;
+}
+
+.account-btn-signup {
+  color:#fff;
+  background: #ee6e73;
+  margin: 16px 0px !important;
+
+}
+
+.account-btn-signup, .account-btn-login{
+  height: 50px;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  width: 160px;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 18px;
+}
+
+.account-btn-signup span, .account-btn-login span{
+  font-size: 12px;
+}
+.account-btn-signup:focus{
+  background: #ee6e73 !important;
+}

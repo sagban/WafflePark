@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {OpenDialogService} from '../open-dialog.service';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _openDialogService: OpenDialogService) { }
+
 
   ngOnInit() {
+  }
+
+
+  openDialog():void{
+    this._openDialogService.openDialog(LoginComponent);
   }
 
 }

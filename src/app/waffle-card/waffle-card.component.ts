@@ -58,7 +58,6 @@ export class WaffleCardComponent implements OnInit {
           this._cartService.addItems(res).subscribe(res=>{
             console.log(res);
           });
-
         }
       })
     });

@@ -8,6 +8,8 @@ router.get('/waffles', controllers.waffles);
 router.get('/waffle/:id', controllers.waffle);
 router.post('/add_cart', controllers.addCart);
 router.post('/update_cart', controllers.updateCart);
+router.post('/signup', controllers.signup);
+router.post('/login', controllers.login);
 router.get('/fetch_cart', controllers.fetchCart);
 
 module.exports = router;
