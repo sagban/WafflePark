@@ -3,17 +3,20 @@ import {FormGroup, FormControl, FormGroupDirective, NgForm, Validators} from '@a
 import {OpenDialogService} from '../open-dialog.service';
 import {SignupComponent} from '../signup/signup.component';
 import {FormSubmitService} from '../form-submit.service';
+import {SessionsService} from '../sessions.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   constructor(
     private _openDialogService: OpenDialogService,
-    private _formSubmitService: FormSubmitService
+    private _formSubmitService: FormSubmitService,
+    private _sessionsService: SessionsService
   ) { }
   LoginForm: any;
   color = 'primary';
@@ -57,6 +60,7 @@ export class LoginComponent implements OnInit {
       else if(res.status == 1){
         console.log(res.message);
         this._openDialogService.closeDialog();
+        this._formSubmitService.getSession.emit(true);
       }
       else{
         this.message = "Error: Something went wrong";

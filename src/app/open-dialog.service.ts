@@ -24,6 +24,7 @@ export class OpenDialogService {
     var height = 'auto';
     if(this.screen < 600 ){
       width = '100%';
+      height = '100%';
 
     }
 

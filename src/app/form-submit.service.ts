@@ -1,10 +1,12 @@
-import {Inject, Injectable} from '@angular/core';
+import {EventEmitter, Inject, Injectable, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DOCUMENT} from '@angular/platform-browser';
 @Injectable({
   providedIn: 'root'
 })
 export class FormSubmitService {
+
+  @Output() getSession: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private http:HttpClient,
@@ -23,6 +25,13 @@ export class FormSubmitService {
 
     var url = 'http://'+this.document.location.hostname+':3000/api/login';
     return this.http.post(url, data, {
+      withCredentials: true  // <=========== important!
+    });
+  }
+  logout():any{
+
+    var url = 'http://'+this.document.location.hostname+':3000/api/logout';
+    return this.http.get(url, {
       withCredentials: true  // <=========== important!
     });
   }

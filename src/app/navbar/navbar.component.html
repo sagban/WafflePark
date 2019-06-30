@@ -6,50 +6,56 @@
 
     <div class="nav-wrapper white home-block-nav-menu">
 
-
-        <a href="#" data-target="mobile-demo" (click)="drawer.toggle()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
-
-      <div class="home-block-nav-logo">
-        <a class="waves-effect waves-teal right" href="/"><img src="../../assets/logo.png" alt="logo" height="40px" width="auto"></a>
-      </div>
       <div class="home-block-nav-logo-sm">
         <a class="waves-effect waves-teal right" href="/"><img src="../../assets/logo-sm.png" alt="logo" width="100%"></a>
       </div>
+      <div class="home-block-nav-btn-sm">
+        <a href="#" data-target="mobile-demo" (click)="drawer.toggle()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      </div>
+
+
+      <!--Large Navbar-->
+      <div class="home-block-nav-logo">
+        <a class="waves-effect waves-teal right" href="/"><img src="../../assets/logo.png" alt="logo" height="40px" width="auto"></a>
+      </div>
       <ul class="hide-on-med-and-down">
-        <li><a href="sass.html">HOME</a></li>
-        <li><a href="#order">ORDER</a></li>
-        <li><a href="mobile.html">SUPPORT</a></li>
-        <li><a href="collapsible.html">SEARCH</a></li>
+        <li><a href="collapsible.html"><mat-icon>search</mat-icon>SEARCH</a></li>
+        <li><a href="#order"><mat-icon>new_releases</mat-icon>ORDER</a></li>
+        <li><a href="mobile.html"><mat-icon>contact_support</mat-icon>SUPPORT</a></li>
+        <li>
+          <button *ngIf="session == false" mat-button (click)="openDialog()" class="waves-effect waves-teal btn-flat left"><mat-icon>person_outline</mat-icon>SIGN IN</button>
+          <button *ngIf="session == true" mat-button [matMenuTriggerFor]="beforeMenu" class="waves-effect waves-teal btn-flat left"><mat-icon>person_outline</mat-icon>Hello<mat-icon>keyboard_arrow_down</mat-icon></button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>My Orders</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </li>
       </ul>
       <div class="home-block-nav-btn">
-        <button mat-button (click)="openDialog()" class="waves-effect waves-teal btn-flat left">SIGN IN</button>
-        <a href="#" class="cart"><mat-icon>add_shopping_cart</mat-icon></a>
+        <div>
+          <a href="/checkout" class="cart"><mat-icon>shopping_basket</mat-icon>CART</a>
+        </div>
       </div>
 
     </div>
 </nav>
 
 <mat-drawer-container class="sidenav-container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="over">
-
-
+  <mat-drawer #drawer class="sidenav" mode="over">
     <ul class="" id="mobile-demo">
-
-      <li style="margin-bottom: 20px; margin-top: 100px"><a href="/"><img src="../../assets/logo.png" alt="logo" height="75%"/></a></li>
-      <li><a href="sass.html">HOME</a></li>
-        <li><a href="#order">ORDER</a></li>
-        <li><a href="mobile.html">SUPPORT</a></li>
-        <li><a href="collapsible.html">SEARCH</a></li>
+      <li style="padding: 50px 0;margin-bottom: 24px;background: #efefef;"><a href="/"><img src="../../assets/logo.png" alt="logo" height="75%"/></a></li>
+      <li><a *ngIf="session == true"><mat-icon>person_outline</mat-icon>Hello</a></li>
+      <li><a *ngIf="session == true"><mat-icon>local_pizza</mat-icon>My Orders</a></li>
+      <li><a href="collapsible.html"><mat-icon>search</mat-icon>SEARCH</a></li>
+      <li><a href="#order"><mat-icon>new_releases</mat-icon>ORDER</a></li>
+      <li><a href="mobile.html"><mat-icon>contact_support</mat-icon>SUPPORT</a></li>
+      <li><a href="/checkout" class="cart"><mat-icon>shopping_basket</mat-icon>CART</a></li>
       <li>
-        <a  href="#" (click)="openDialog()">SIGN IN</a>
-
+        <button *ngIf="session == false" mat-button (click)="openDialog()" class="waves-effect waves-teal btn-flat left"><mat-icon>person_outline</mat-icon>SIGN IN</button>
       </li>
-      <li><a href="#" class="cart"><i class="material-icons">add_shopping_cart</i></a></li>
+      <li><a *ngIf="session == true" (click)="logout()"><mat-icon>all_out</mat-icon>Logout</a></li>
+
 
     </ul>
-
-
   </mat-drawer>
-
 </mat-drawer-container>

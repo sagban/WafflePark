@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CartService} from '../cart.service';
+import {FormSubmitService} from '../form-submit.service';
 
 @Component({
   selector: 'app-sidecart',
@@ -10,13 +11,32 @@ export class SidecartComponent implements OnInit {
 
   cart: any = [];
   quantity: number;
+  color = 'primary';
+  mode = 'query';
+  fetching: boolean = false;
+  session: boolean = false;
 
+  constructor(
+    private _cartService: CartService,
+    private _formSubmitService: FormSubmitService) {
 
-  constructor(private _cartService: CartService) {
+    this.fetching = true;
     this._cartService.getItems().subscribe(res =>{
       this._cartService.cart = res;
       this.showCart();
+      this.fetching = false;
     });
+
+     _formSubmitService.getSession.subscribe(value=>{
+
+        this.fetching = true;
+        this._cartService.getItems().subscribe(res =>{
+          this._cartService.cart = res;
+          this.showCart();
+          this.fetching = false;
+        });
+
+      });
   }
 
   ngOnInit() {
@@ -73,6 +93,11 @@ export class SidecartComponent implements OnInit {
     }
     return items
   }
+
+  changeSession(value){
+    this.session = value;
+  }
+
 
 
 

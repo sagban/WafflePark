@@ -37,6 +37,17 @@ module.exports = function Cart (oldcart){
     }
     return arr;
   };
+  this.getListDB = function(){
+    var arr = [];
+
+    for(var i in this.data){
+      arr.push({
+        itemId: this.data[i].id,
+        itemQty: this.data[i].quantity
+      });
+    }
+    return arr;
+  };
 
   this.update = function(items){
 

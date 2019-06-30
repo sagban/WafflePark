@@ -14,7 +14,7 @@
   display: flex;
   position: relative;
   padding-top: 80px;
-  background: #fafafa;
+  background: #eee;
 }
 
 @media(max-width: 600px){

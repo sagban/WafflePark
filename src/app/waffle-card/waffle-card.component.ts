@@ -21,6 +21,9 @@ export class WaffleCardComponent implements OnInit {
 
   waffles: any;
   waff:any;
+  color = 'primary';
+  mode = 'query';
+  fetching: Boolean= false;
 
   constructor(
     private http: HttpClient,
@@ -29,8 +32,10 @@ export class WaffleCardComponent implements OnInit {
     private _cartService: CartService) {}
 
   ngOnInit() {
+    this.fetching = true;
     this.http.get('http://'+this.document.location.hostname+':3000/api/waffles').subscribe((res: any) => {
       this.waffles = res;
+      this.fetching = false;
     });
 
   }

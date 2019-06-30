@@ -32,7 +32,10 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { SignupComponent } from './signup/signup.component';
 import {OpenDialogService} from './open-dialog.service';
 import {FormSubmitService} from './form-submit.service';
+import {SessionsService} from './sessions.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -69,7 +72,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatProgressBarModule
   ],
   entryComponents:[
     ShowWaffleComponent,
@@ -78,7 +83,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   providers: [
     CartService,
     OpenDialogService,
-    FormSubmitService
+    FormSubmitService,
+    SessionsService
   ],
   bootstrap: [AppComponent]
 })

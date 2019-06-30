@@ -18,8 +18,7 @@ let User = new Schema({
     }
 
   }]
-},
-  { autoCreate: true});
+});
 
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', User, 'User');

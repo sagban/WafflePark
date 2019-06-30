@@ -75,3 +75,10 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 .mat-vertical-content{
   padding: 0px !important;
 }
+
+.cdk-mouse-focused{
+  background: white !important;
+}
+.cdk-mouse-focused:hover{
+  background: rgba(0, 0, 0, 0.04) !important;
+}

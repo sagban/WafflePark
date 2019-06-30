@@ -9,7 +9,7 @@
         <mat-vertical-stepper [linear]="true" #stepper class="stepper">
           <mat-step>
             <ng-template matStepLabel><h4>Account</h4></ng-template>
-            <div class="account">
+            <div class="account" *ngIf="session == false">
               <div class="account-body">
                 <div class="account-login">
                   <button class="account-btn-login" type="button" (click)="openLoginDialog()" mat-flat-button><span>Have an account?</span><br>LOG IN</button>

@@ -13,15 +13,22 @@ footer a{
   height: 100%;
 }
 
-.footer-copyright, .footer-copyright a{
+.footer-copyright{
   display: block;
   font-size: 12px;
   color: #111;
   display: flex;
   font-weight: 100;
+  justify-content: center;
   align-items: center;
   height: 100%;
 }
+
+.footer-copyright span{
+  font-size: 12px;
+  color: #111;
+}
+
 .contact, .locate{
   color: #111111;
   font-size: 16px;

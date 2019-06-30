@@ -2,7 +2,18 @@
   <div class="waffle-card-heading">
     <h4>Our Specialities</h4>
   </div>
-
+  <div *ngIf="fetching == true" class="fetching" style="padding-top: 50px">
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+  </div>
+  <div *ngIf="fetching == true" class="fetching" style="padding-top: 50px">
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+  </div>
+  <div *ngIf="fetching == true" class="fetching" style="padding-top: 50px">
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+  </div>
   <div class="row">
     <div class="col s12 m6 l6 xl6 waffle-item" *ngFor="let waffle of waffles">
 
@@ -18,8 +29,6 @@
           </mat-card-title-group>
           </a>
         </mat-card>
-
     </div>
-
   </div>
 </div>

@@ -34,6 +34,11 @@
   margin-top: 16px !important;
 }
 
+.fetching{
+  display: flex; justify-content: center;
+  padding: 20px 0;
+}
+
 .parked-list{
   margin: 10px 0px;
   overflow: auto;

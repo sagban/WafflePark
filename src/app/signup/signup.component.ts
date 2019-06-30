@@ -3,6 +3,7 @@ import {FormGroup, FormControl, FormGroupDirective, NgForm, Validators} from '@a
 import {OpenDialogService} from '../open-dialog.service';
 import {LoginComponent} from '../login/login.component';
 import {FormSubmitService} from '../form-submit.service';
+import {SessionsService} from '../sessions.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private _openDialogService: OpenDialogService,
-    private _formSubmitService: FormSubmitService
+    private _formSubmitService: FormSubmitService,
+    private _sessionsService: SessionsService
   ) { }
 
   SignupForm :any;
@@ -68,7 +70,9 @@ export class SignupComponent implements OnInit {
       }
 
       else if(res.status == 1){
+        console.log(res);
         this._openDialogService.closeDialog();
+        this._formSubmitService.getSession.emit(true);
       }
       else{
         this.message = "Something went wrong";

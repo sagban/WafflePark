@@ -3,10 +3,14 @@
 
   <a mat-flat-button href="/checkout" class="checkout">Checkout</a>
   <mat-divider></mat-divider>
+  <div *ngIf="fetching == true" class="fetching">
+    <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
+  </div>
 
-  <mat-card-subtitle *ngIf="cart.length <=0" class="sidecart-sub">Your parked waffles will be shown here!</mat-card-subtitle>
+  <mat-card-subtitle *ngIf="cart.length <=0" class="sidecart-sub">
+    Your parked waffles will be shown here!
+  </mat-card-subtitle>
   <div class="parked-list" *ngIf="cart.length >0">
-
     <div class="cart-item" *ngFor="let c of cart; let i = index" [ngClass]="{'false': i ==0}">
       <div class="cart-item-inner">
         <div class="cart-item-content">
