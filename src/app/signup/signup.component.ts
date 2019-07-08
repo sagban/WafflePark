@@ -73,6 +73,7 @@ export class SignupComponent implements OnInit {
         console.log(res);
         this._openDialogService.closeDialog();
         this._formSubmitService.getSession.emit(true);
+        this._formSubmitService.getUser.emit(res.data);
       }
       else{
         this.message = "Something went wrong";

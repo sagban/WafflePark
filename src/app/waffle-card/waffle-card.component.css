@@ -63,7 +63,9 @@
   width: 100%;
 
 }
-
+.show-card-inner{
+  width: 100%;
+}
 .show-card-heading h3{
   font-size: 25px !important;
 }
@@ -166,7 +168,7 @@
   float: right;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 992px) {
   .show-card{
     margin: 0;
     padding: 0;

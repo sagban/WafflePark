@@ -24,7 +24,7 @@ export class OpenDialogService {
     var height = 'auto';
     if(this.screen < 600 ){
       width = '100%';
-      height = '100%';
+      height = '100vh';
 
     }
 
@@ -36,8 +36,10 @@ export class OpenDialogService {
         maxHeight: '100%'
     });
   }
+
   closeDialog():void{
     this.dialogRef.close();
   }
+
 
 }

@@ -13,6 +13,7 @@ import {FormSubmitService} from '../form-submit.service';
 export class NavbarComponent implements OnInit {
 
   session: boolean = false;
+  user: object={};
   constructor(
     private _openDialogService: OpenDialogService,
     private _sessionsService: SessionsService,
@@ -22,6 +23,9 @@ export class NavbarComponent implements OnInit {
 
     _formSubmitService.getSession.subscribe(value=>{
       this.changeSession(value);
+    });
+    _formSubmitService.getUser.subscribe(value=>{
+      this.user = value
     });
   }
 
@@ -37,9 +41,13 @@ export class NavbarComponent implements OnInit {
   changeSession(value){
     this.session = value;
   }
+  private changeUser(value){
+    this.user = value;
+  }
   checkSession(){
     this._sessionsService.checkSession().subscribe(res=>{
       this.changeSession(res.data);
+      this.changeUser(res.user);
     });
   }
 
@@ -48,7 +56,6 @@ export class NavbarComponent implements OnInit {
       if(res.status == 1){
         this._formSubmitService.getSession.emit(false);
       }
-
     })
   }
 

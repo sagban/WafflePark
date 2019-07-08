@@ -82,3 +82,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 .cdk-mouse-focused:hover{
   background: rgba(0, 0, 0, 0.04) !important;
 }
+
+button:focus{
+  background: white!important;
+}

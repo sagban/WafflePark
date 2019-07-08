@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {CartService} from '../cart.service';
 import {FormSubmitService} from '../form-submit.service';
 
@@ -13,8 +13,12 @@ export class SidecartComponent implements OnInit {
   quantity: number;
   color = 'primary';
   mode = 'query';
+  style = false;
+  cartName = "View Cart";
   fetching: boolean = false;
   session: boolean = false;
+  @Input() pageName;
+  @Output() isCartEmpty: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private _cartService: CartService,
@@ -24,6 +28,9 @@ export class SidecartComponent implements OnInit {
     this._cartService.getItems().subscribe(res =>{
       this._cartService.cart = res;
       this.showCart();
+      if(this.cart.length == 0){
+        this.isCartEmpty.emit(true);
+      }
       this.fetching = false;
     });
 
@@ -33,6 +40,9 @@ export class SidecartComponent implements OnInit {
         this._cartService.getItems().subscribe(res =>{
           this._cartService.cart = res;
           this.showCart();
+          if(this.cart.length == 0){
+            this.isCartEmpty.emit(true);
+          }
           this.fetching = false;
         });
 
@@ -45,6 +55,7 @@ export class SidecartComponent implements OnInit {
 
   showCart():void{
     this.cart =  this._cartService.returnItems();
+
   }
 
   incQuantity(i): void{
@@ -66,6 +77,9 @@ export class SidecartComponent implements OnInit {
 
   removeItem(i):void{
     this.cart.splice(i, 1);
+    if(this.cart.length == 0){
+      this.isCartEmpty.emit(true);
+    }
     this._cartService.updateItems(this.cart).subscribe(res=>{
       console.log(res);
     });
@@ -98,8 +112,10 @@ export class SidecartComponent implements OnInit {
     this.session = value;
   }
 
-
-
+  display(){
+    this.style = this.style == true?false:true;
+    this.cartName = this.style == true?"Hide Cart":"View Cart";
+  }
 
 
 }

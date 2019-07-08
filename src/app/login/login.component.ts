@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
         console.log(res.message);
         this._openDialogService.closeDialog();
         this._formSubmitService.getSession.emit(true);
+        this._formSubmitService.getUser.emit(res.data);
       }
       else{
         this.message = "Error: Something went wrong";

@@ -13,10 +13,18 @@ let User = new Schema({
     type: String
   },
   address:[{
+    label : {
+      type: String
+    },
+    flatNo:{
+      type: String
+    },
     body : {
       type: String
+    },
+    pincode:{
+      type: String
     }
-
   }]
 });
 

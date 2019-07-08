@@ -39,6 +39,9 @@ export class CartService{
   returnItems():any{
     return this.cart;
   }
+  returnLength():number{
+    return this.cart.length;
+  }
 
 
 }

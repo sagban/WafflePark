@@ -13,5 +13,7 @@ router.post('/login', controllers.login);
 router.get('/logout', controllers.logout);
 router.get('/fetch_cart', controllers.fetchCart);
 router.get('/check', controllers.check);
+router.get('/fetch_address', controllers.fetchAddress);
+router.post('/add_address', controllers.addAddress);
 
 module.exports = router;

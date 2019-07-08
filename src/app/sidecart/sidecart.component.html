@@ -1,16 +1,24 @@
 <mat-card class="sidecart shadow">
 
 
-  <a mat-flat-button href="/checkout" class="checkout">Checkout</a>
+  <a href="/checkout" [ngClass]="{'disabled' : cart.length<=0}" *ngIf="pageName == 'home'">
+    <div  mat-flat-button  class="checkout">
+
+        <div class="btn-totali">{{totalItems()}} items</div>
+        <div class="btn-name">Checkout</div>
+        <div class="btn-totalm">INR [{{totalAmount()}}]</div>
+
+    </div>
+  </a>
   <mat-divider></mat-divider>
   <div *ngIf="fetching == true" class="fetching">
     <mat-progress-bar [mode]="mode" [color]="color"></mat-progress-bar>
   </div>
 
   <mat-card-subtitle *ngIf="cart.length <=0" class="sidecart-sub">
-    Your parked waffles will be shown here!
+    <span *ngIf="pageName == 'home'">Your parked waffles will be shown here!</span>
   </mat-card-subtitle>
-  <div class="parked-list" *ngIf="cart.length >0">
+  <div class="parked-list" [ngClass]="{'displayOnClick' : style}" *ngIf="cart.length >0">
     <div class="cart-item" *ngFor="let c of cart; let i = index" [ngClass]="{'false': i ==0}">
       <div class="cart-item-inner">
         <div class="cart-item-content">
@@ -27,6 +35,11 @@
     </div>
   </div>
   <mat-divider></mat-divider>
+  <div mat-flat-button class="checkout checkout-viewcart" (click)="display()" *ngIf="pageName == 'checkout'">
+      <div class="btn-totali">{{totalItems()}} items</div>
+      <div class="btn-name">{{cartName}}</div>
+      <div class="btn-totalm">INR [{{totalAmount()}}]</div>
+  </div>
   <div class="sub-total" *ngIf="cart.length >0">
     <div class="sub-total-item">Subtotal ({{totalItems()}} items)</div>
     <div class="sub-total-amount">INR {{totalAmount()}}</div>

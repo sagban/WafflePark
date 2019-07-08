@@ -24,6 +24,7 @@ export class WaffleCardComponent implements OnInit {
   color = 'primary';
   mode = 'query';
   fetching: Boolean= false;
+  @Input() pageName;
 
   constructor(
     private http: HttpClient,

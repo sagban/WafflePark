@@ -14,10 +14,11 @@ function dbError(err) {
   };
 }
 
-function sendStatus(msg, status = 0, err = false){
+function sendStatus(msg, status = 0, data, err = false){
   return {
     message: msg,
     status: status,
+    data: data,
     error: err
   };
 }
@@ -38,26 +39,26 @@ function checkName(str){
 }
 
 
-function updateUserCart(req, res, msg){
+function updateUserCart(req, res, msg, data = false){
     var userId = req.session.uid;
     var cart = new Cart(req.session['cart']? req.session['cart']: {});
-    var data = cart.getListDB();
+    var cartData = cart.getListDB();
     const totalQty = cart.totalQty;
     const totalPrice = cart.totalPrice;
 
     UserCart.findOne({userId: userId},(err, rusercart) =>{
 
-      if(err){res.send(sendStatus(msg, 1, err));}
+      if(err){res.send(sendStatus(msg, 1, data, err));}
       else if(rusercart){
 
         rusercart.totalPrice = totalPrice;
         rusercart.totalQty = totalQty;
-        rusercart.data = data;
+        rusercart.data = cartData;
         rusercart.save(err =>{
           if(err){
-            res.send(sendStatus(msg, 1, err));
+            res.send(sendStatus(msg, 1, data, err));
           }
-          else res.send(sendStatus(msg, 1));
+          else res.send(sendStatus(msg, 1, data));
         });
       }
       else{
@@ -65,13 +66,13 @@ function updateUserCart(req, res, msg){
           userId: userId,
           totalQty: totalQty,
           totalPrice: totalPrice,
-          data: data
+          data: cartData
         });
         newUserCart.save(err =>{
           if(err){
-            res.send(sendStatus(msg, 1, err));
+            res.send(sendStatus(msg, 1, data,err));
           }
-          else res.send(sendStatus(msg, 1));
+          else res.send(sendStatus(msg, 1, data));
         });
       }
     });
@@ -116,7 +117,7 @@ exports.addCart = (req, res) =>{
   req.session['cart'] = cart;
   const success_msg = "ITEM_ADDED_SUCCESS";
   if(!req.session['email']){
-    res.send(sendStatus(success_msg, 1));
+    res.send(sendStatus(success_msg, 1, false));
   }
   else {
     updateUserCart(req, res, success_msg);
@@ -129,7 +130,7 @@ exports.fetchCart = (req, res) =>{
     var userId = req.session.uid;
     UserCart.findOne({userId: userId}, async (err, rusercart) => {
       if (err) {
-        res.send(sendStatus(msg, 1, err));
+        res.send(sendStatus(msg, 1, false, err));
       }
       else if (rusercart) {
         var data = rusercart.data;
@@ -146,7 +147,7 @@ exports.fetchCart = (req, res) =>{
         res.send(c);
       }
       else {
-        res.send(sendStatus("Something went wrong", 1));
+        res.send(sendStatus("Something went wrong", 1, false));
       }
     });
   }
@@ -167,7 +168,7 @@ exports.updateCart = (req, res) =>{
   req.session['cart'] = cart;
   const success_msg = "UPDATE_SUCCESS";
   if(!req.session['email']){
-    res.send(sendStatus(success_msg, 1));
+    res.send(sendStatus(success_msg, 1, false));
   }
   else {
     updateUserCart(req, res, success_msg);
@@ -187,13 +188,13 @@ exports.signup = (req, res) =>{
     if(email && contact && name && pass){
 
       if(pass.length < 8){
-        res.send(sendStatus("Minimum length of 8 is required for password",0));
+        res.send(sendStatus("Minimum length of 8 is required for password", 0, false));
       }
       else if(!checkPhone(contact)){
-        res.send(sendStatus("Kindly enter the valid mobile number",0));
+        res.send(sendStatus("Kindly enter the valid mobile number", 0, false));
       }
       else if(!checkName(name)){
-        res.send(sendStatus("Kindly enter the valid name",0));
+        res.send(sendStatus("Kindly enter the valid name", 0, false));
       }
       else {
 
@@ -204,7 +205,7 @@ exports.signup = (req, res) =>{
           }
           if(user){
             console.log(user, "user");
-            res.send(sendStatus("Email already exist", 0));
+            res.send(sendStatus("Email already exist", 0, false));
           }
           else if(!user) {
 
@@ -232,7 +233,7 @@ exports.signup = (req, res) =>{
                   req.session['email'] = email;
                   req.session['uid'] = ruser._id;
                   const success_msg = "NEW_USER_CREATED";
-                  updateUserCart(req, res, success_msg);
+                  updateUserCart(req, res, success_msg, ruser);
                 });
               }
             });
@@ -241,11 +242,11 @@ exports.signup = (req, res) =>{
       }
     }
     else{
-      res.send(sendStatus("Kindly enter all the valid details", 0));
+      res.send(sendStatus("Kindly enter all the valid details", 0, false));
     }
   }
   else{
-    res.send(sendStatus("Kindly logout first", 0));
+    res.send(sendStatus("Kindly logout first", 0, false));
   }
 };
 
@@ -267,43 +268,93 @@ exports.login = (req, res) =>{
             req.session['email'] = email;
             const success_msg = "LOGIN_SUCCESS";
             User.findOne({email : email}, (err, ruser)=>{
-              if(err){res.send(sendStatus(success_msg, 1, err));}
+              if(err){res.send(sendStatus(success_msg, 1, ruser, err));}
               else{
                 req.session["uid"] = ruser._id;
 
                 if(req.session['cart']){
-                  updateUserCart(req, res, success_msg);
+                  updateUserCart(req, res, success_msg, ruser);
                 }
 
-                else{res.send(sendStatus(success_msg, 1));}
+                else{res.send(sendStatus(success_msg, 1, ruser));}
 
               }
             });
           }
-          else{res.send(sendStatus("Incorrect Password", 0));}
+          else{res.send(sendStatus("Incorrect Password", 0, false));}
         }
         else{
           //Check in User
           //if found ask for verify email id
           // Else return not found
-          res.send(sendStatus("Email is not registered", 0));
+          res.send(sendStatus("Email is not registered", 0, false));
         }
       });
     }
-    else{res.send(sendStatus("Kindly enter all the valid details", 0));}
+    else{res.send(sendStatus("Kindly enter all the valid details", 0, false));}
   }
-  else{res.send(sendStatus("Already login", 0));}
+  else{res.send(sendStatus("Already login", 0, false));}
 };
 
 
 exports.logout = (req, res) =>{
   delete req.session['email'];
   delete req.session['cart'];
-  res.send(sendStatus("LOGOUT_DONE", 1));
+  delete req.session['uid'];
+  res.send(sendStatus("LOGOUT_DONE", 1, false));
 };
 
 
-exports.check = (req, res) =>{
-  if(req.session['email']){res.send({data: true});}
-  else res.send({data: false});
+exports.check = async (req, res) =>{
+  var sess = {
+    data: false,
+    user:{},
+    add: false,
+    address: {}
+  };
+  if(req.session['email']){
+    sess['data'] = true;
+    await User.findOne({email: req.session['email']}, (err, ruser) =>{
+      if(err)res.send(dbError(err));
+      else {
+        sess['user'] = ruser;
+      }
+    });
+  }
+
+  if(req.session['address']) {
+     sess['add'] = true;
+     sess['address'] = req.session['address'];
+  }
+  console.log(sess);
+  res.send(sess);
+};
+
+exports.addAddress = (req, res)=>{
+
+  if(req.session['email']){
+    req.session['address'] = req.body;
+    res.send(sendStatus("ADD_ADDED", 1, false));
+  }
+  else{
+    res.send(sendStatus("Nothing to add", 0, false));
+  }
+};
+
+exports.fetchAddress = (req, res)=>{
+
+  if(req.session['email']){
+
+    User.findOne({email: req.session['email']}, {address: 1}, (err, data) =>{
+      if(err)res.send(dbError(err));
+      else{
+        console.log(data);
+        data['status'] = 1;
+        res.send(data);
+      }
+    });
+  }
+  else{
+    res.send(sendStatus("Nothing to fetch", 0, false));
+  }
 };

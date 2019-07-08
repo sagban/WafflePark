@@ -13,7 +13,7 @@ export class SessionsService {
   session: boolean;
 
 
-  checkSession():any{
+  checkSession():any {
     var url = 'http://'+this.document.location.hostname+':3000/api/check';
     return this.http.get(url, {
       withCredentials: true  // <=========== important!
