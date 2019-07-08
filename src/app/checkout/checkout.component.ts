@@ -122,6 +122,7 @@ export class AddressComponent {
 
   AddressForm:any;
   constructor(public dialogRef: MatDialogRef<AddressComponent>,
+              private _openDialogService: OpenDialogService,
               private _formSubmitService: FormSubmitService){
   }
 
@@ -143,6 +144,9 @@ export class AddressComponent {
   add_address(){
     this.dialogRef.close();
     this._formSubmitService.getAddress.emit(this.AddressForm.value);
+  }
+  onNoClick(): void {
+    this._openDialogService.closeDialog();
   }
 
 

@@ -19,17 +19,6 @@
   padding-left: 2%;
 }
 
-@media(max-width: 994px){
-  .main-flex{
-    display: block;
-  }
-  .main, .aside{
-    width: 100%;
-    padding: 25px;
-    margin: 0;
-  }
-}
-
 .mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {
   background-color: #fff !important;
 }
@@ -138,10 +127,10 @@
   margin-bottom: 20px;
 }
  .address-addnew{
-   background: url("../../assets/add_address2.png");
+   background: url("../../assets/add_address3.png");
    background-repeat: no-repeat;
    background-position: center;
-   background-size: contain;
+   background-size: cover;
    border:1.3px #bbb dashed;
  }
 .address-card:hover{
@@ -285,6 +274,32 @@
   color: orange;
   margin-top: 5px;
 }
+
+.show-card-close{
+  position: absolute;
+  margin-left: 300px;
+  width: 100%;
+  margin-top: 10px;
+}
+.close{
+  box-shadow: 0 0!important;
+}
+.close:focus{
+ background: transparent;
+}
+
+
+@media(max-width: 994px){
+  .main-flex{
+    display: block;
+  }
+  .main, .aside{
+    width: 100%;
+    padding: 25px;
+    margin: 0;
+  }
+}
+
 @media(max-width: 600px){
   .step{
     padding: 20px;
@@ -307,7 +322,17 @@
     justify-content: center;
     /*line-height: 0px;*/
   }
+
   .account-btn-login{
     margin:15px 15px 15px 0px !important;
   }
+  .show-card-close{
+    margin-left: 265px;
+  }
 }
+@media(max-width: 320px){
+  .show-card-close{
+    margin-left: 225px;
+  }
+}
+
