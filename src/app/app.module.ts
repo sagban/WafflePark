@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserformComponent } from './userform/userform.component';
 import {MatCardModule} from '@angular/material/card';
 import { WaffleCardComponent, ShowWaffleComponent } from './waffle-card/waffle-card.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -41,7 +40,6 @@ import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
-    UserformComponent,
     WaffleCardComponent,
     MenuComponent,
     HeaderComponent,
