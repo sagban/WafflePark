@@ -6,6 +6,7 @@ var UserCart = require("../models/UserCart");
 var Login = require("../models/login");
 var bCrypt = require('bcrypt-nodejs');
 
+// Sends Database Error to the client
 function dbError(err) {
   return {
     message: "ERROR",
@@ -14,6 +15,7 @@ function dbError(err) {
   };
 }
 
+// Send the response to the client with or without errors
 function sendStatus(msg, status = 0, data, err = false){
   return {
     message: msg,
@@ -23,22 +25,24 @@ function sendStatus(msg, status = 0, data, err = false){
   };
 }
 
+// Hash the user password
 function generateHash(password){
   return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 }
 
-
+// Check for the valid 10 digit contact number
 function checkPhone(str){
   var p = new RegExp("^[6-9]{1}[0-9]{9}$");
   return p.test(str);
 }
 
+// Check for the valid client name - contains only alphabets
 function checkName(str){
   var p = new RegExp("^([a-zA-Z ]){2,60}$");
   return p.test(str);
 }
 
-
+// Updates the user-cart and used in many below controllers
 function updateUserCart(req, res, msg, data = false){
     var userId = req.session.uid;
     var cart = new Cart(req.session['cart']? req.session['cart']: {});
