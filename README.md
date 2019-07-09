@@ -1,5 +1,5 @@
 # Waffle Park - Online Food Delivery Webapp
-
+****
 This repository has code a online food delivery web app that is configured with the MEAN stack (MongoDB, Express.js, Angular 7, Node.js)
 Note: This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9. Markdown editor.
 
@@ -60,10 +60,10 @@ Also, to install all server-side dependencies, run this in the application folde
 $ cd server && npm install
 ```
 
-##### Client server
+### Client server
 
 Run `ng serve --host 0.0.0.0` for a dev server. Navigate to `http://0.0.0.0:4200/`. The app will automatically reload if you change any of the source files.
-##### Backend server
+### Backend server
 
 Run `cd server && npm start` for a backend server. Navigate to `http://0.0.0.0:3000/api`. This will show you the Waffle park API service page.
 
@@ -80,6 +80,7 @@ The file `seeder.js` contains the code which seeds up to the MongoDB database wi
 ## Stucture And Functionality
 
 #### Client Side
+------
 As the client-side I've used Angular 7, hence this the major building blocks for the client side applications are the following `components` and `services`
 
 1. **HeaderComponent** - This component contains the header of the application which can be used for the branding purpose.
@@ -88,9 +89,10 @@ As the client-side I've used Angular 7, hence this the major building blocks for
 2. **NavbarComponent** - This component contains the nav links of the application which can be seen at the top of the page after the header. In the mobile view, it draws from the left side. The most important nav links are Sign and user cart. On clicking Sign in it open the popups for Login and signup by calling `OpenDialogService` respectively. Also, `FormSubmitService` and `SessionService` are called from this component to get the login status of the user.
 ![](https://i.ibb.co/ykQ6wKd/Screen-Shot-2019-07-08-at-3-22-37-PM.png)
 
-3. **LoginComponent** - This component showed up in the popup which is called by the `OpenDialogService`. Here user login into his pre-existing account by using his valid credentials. The input of the login form is passed to the 'FormSubmittingService' which further send the data to the server where the validation is done by a `POST: /api/login` request. ![](https://i.ibb.co/JBPy8Wz/Screen-Shot-2019-07-08-at-3-25-06-PM.png)
+3. **LoginComponent** - This component showed up in the popup which is called by the `OpenDialogService`. Here user login into his pre-existing account by using his valid credentials. The input of the login form is passed to the 'FormSubmittingService' which further send the data to the server where the validation is done by a `POST: /api/login` request.
+![](https://i.ibb.co/JBPy8Wz/Screen-Shot-2019-07-08-at-3-25-06-PM.png)
 
-4. **SignupComponent** - This component works the same as the `LoginComponent`. Instead of login into the pre-existing account, the user can sign in to a new account. Data is sent to the server by calling `POST: /api/signup` request.
+4. **SignupComponent** - This component works the same as the `LoginComponent`. Instead of login into the pre-existing account, the user can sign in to a new account. Data is sent to the server by calling `POST: /api/signup` request. 
 ![](https://i.ibb.co/7Cz2cpk/Screen-Shot-2019-07-08-at-3-25-15-PM.png)
 
 5. **FooterComponent** - This component contains the footer of the application which consists of the links and other details of the company.
@@ -99,7 +101,7 @@ As the client-side I've used Angular 7, hence this the major building blocks for
 6. **WaffleCardComponent** - This component contains the list of the menu item fetched from the server using `GET: /api/waffles` request into a `waffles: any` variable, which is further used to display fetched data.
 ![](https://i.ibb.co/8cCbgfp/Screen-Shot-2019-07-08-at-3-24-08-PM.png)
 
-7. **ShowWaffleComponent** - This component is nothing but the extended part of the `WaffleCardComponent`. It shows the detailed version of each menu item in the popup view. Here, users can add the clicked item into their cart which is the required quantity. After that these items are returned to the `WaffleCardComponent` and which further calls the `CartService` to push the items to sessions on the server.
+7. **ShowWaffleComponent** - This component is nothing but the extended part of the `WaffleCardComponent`. It shows the detailed version of each menu item in the popup view. Here, users can add the clicked item into their cart which is the required quantity. After that these items are returned to the `WaffleCardComponent` and which further calls the `CartService` to push the items to sessions on the server. 
 ![](https://i.ibb.co/4jH592Q/Screen-Shot-2019-07-08-at-3-24-26-PM.png)
 
 8. **SidecartComponent** - This component contains the cart of the application where all the selected item will be shown with their respected quantities. It also provides the functionalities like controlling the quantity of the item and deleting an item by calling the functions. At the same time, these changes are also updated to the session of the server.
@@ -112,8 +114,8 @@ As the client-side I've used Angular 7, hence this the major building blocks for
 
 
 #### Server Side
-##### Models - Database Schema
-
+------
+### Models - Database Schema
 1. **Cart.js** - This is not a typical database mongoose schema. It is a module/class written in javascript for making cart-sessions operations like adding the item to the cart, updating the cart like total items, and total price of a cart, and providing a final list of cart items in the form of an array easily. What is happening is that when the user (signed/ not signed both) added the item to his cart, that item is received by the server from the client-server and further saved into the sessions.
 Functions
 ***Add** - It takes two args, one is the item object itself and the other is the object id. So first it checks if the item is to add is already present in the dictionary or not. If it's present already it takes that item and only updates that item quantity, total quantity and the total price of the price. Elsewhere, it adds that item to the dictionary and does rest same operations.*
@@ -127,7 +129,7 @@ Functions
 
 5. **UserCart.js** - This model is used for storing the user-cart into a database alongside the sessions for logged in users.
 6. **Orders.js** - This model is used for storing the order details. It has two important keys `UserId`, and `UserCartId`.
-##### Controllers
+### Controllers
 
 1. **Waffles** - This method is called when the req `GET /api/waffles` is made. It just returns the list of items present in the database.
 2. **Waffle** - This method is called when the req `GET /api/waffle/:id` is made, where `id` is the id of the requested item. It returns a requested item.
