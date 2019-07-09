@@ -1,4 +1,4 @@
-`````**__**`````# Waffle Park - Online Food Delivery Webapp
+# Waffle Park - Online Food Delivery Webapp
 
 This repository has code a online food delivery web app that is configured with the MEAN stack (MongoDB, Express.js, Angular 7, Node.js)
 Note: This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9. Markdown editor.
