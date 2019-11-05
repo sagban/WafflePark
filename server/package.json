@@ -15,7 +15,7 @@
     "express-session": "^1.16.2",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "morgan": "~1.9.0",
     "node-machine-id": "^1.1.12",
     "uuid": "^3.3.2"
